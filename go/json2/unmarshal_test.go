@@ -48,3 +48,14 @@ func TestUnmarshal(t *testing.T) {
 		}
 	}
 }
+
+func TestUnmarshalPB(t *testing.T) {
+	want := &emptypb.Empty{}
+	json, err := protojson.Marshal(want)
+	require.NoError(t, err)
+
+	var got emptypb.Empty
+	err = UnmarshalPB(json, &got)
+	require.NoError(t, err)
+	require.Equal(t, want, &got)
+}
